@@ -47,40 +47,41 @@ function addBookToLibrary() {
   myLibrary.push(book);
 }
 
-function fillBookshelf() {
-  // Make a card for each book with that book's information
+function putBookOnShelf(book) {
+  // Make a new div 'book' and fill it with the book's information
+  const bookNode = document.createElement('div');
+  bookNode.classList.add('book');
+
+  const titleNode = document.createElement('h3');
+  titleNode.classList.add('book-title');
+  titleNode.textContent = book.title;
+  bookNode.appendChild(titleNode);
+
+  const authorNode = document.createElement('p');
+  authorNode.classList.add('author');
+  authorNode.textContent = book.author;
+  bookNode.appendChild(authorNode);
+
+  const pagesNode = document.createElement('p');
+  pagesNode.classList.add('pages');
+  pagesNode.textContent = book.pages;
+  bookNode.appendChild(pagesNode);
+
+  const readNode = document.createElement('p');
+  readNode.classList.add('read');
+  if (book.read === true) {
+    readNode.textContent = 'You have read this book';
+  } else {
+    readNode.textContent = "You haven't read this book";
+  }
+  bookNode.appendChild(readNode);
+
   const bookshelf = document.querySelector('.bookshelf');
+  bookshelf.appendChild(bookNode);
+}
 
-  myLibrary.forEach((book) => {
-    const bookNode = document.createElement('div');
-    bookNode.classList.add('book');
-
-    const titleNode = document.createElement('h3');
-    titleNode.classList.add('book-title');
-    titleNode.textContent = book.title;
-    bookNode.appendChild(titleNode);
-
-    const authorNode = document.createElement('p');
-    authorNode.classList.add('author');
-    authorNode.textContent = book.author;
-    bookNode.appendChild(authorNode);
-
-    const pagesNode = document.createElement('p');
-    pagesNode.classList.add('pages');
-    pagesNode.textContent = book.pages;
-    bookNode.appendChild(pagesNode);
-
-    const readNode = document.createElement('p');
-    readNode.classList.add('read');
-    if (book.read === true) {
-      readNode.textContent = 'You have read this book';
-    } else {
-      readNode.textContent = "You haven't read this book";
-    }
-    bookNode.appendChild(readNode);
-
-    bookshelf.appendChild(bookNode);
-  });
+function fillBookshelf() {
+  myLibrary.forEach((book) => putBookOnShelf(book));
 }
 
 // Start the application
