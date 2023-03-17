@@ -37,3 +37,21 @@ function addBookToLibrary() {
   const book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
+
+function fillBookshelf() {
+  const bookshelf = document.querySelector('.bookshelf');
+
+  myLibrary.forEach((book) => {
+    const bookNode = document.createElement('div');
+    bookNode.classList.add('book');
+
+    const titleNode = document.createElement('h3');
+    titleNode.classList.add('book-title');
+    titleNode.textContent = book.title;
+
+    bookNode.appendChild(titleNode);
+    bookshelf.appendChild(bookNode);
+  });
+}
+
+fillBookshelf();
