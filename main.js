@@ -20,7 +20,7 @@ myLibrary.push(theHobbit);
 const lifeAndTimes = new Book(
   'The Life and Times of Scrooge McDuck',
   'Keno Don Rosa',
-  300,
+  266,
   true
 );
 myLibrary.push(lifeAndTimes);
