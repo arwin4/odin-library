@@ -11,6 +11,49 @@
   <body>
     <div class="library">
       <div class="bookshelf"></div>
+      <form
+        id="new-book"
+        action=""
+        onsubmit="addBookToLibrary(title.value, author.value, pages.value, read.value)"
+      >
+        <h4>Add a new book:</h4>
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="50"
+          required
+        />
+        <label for="author">Author</label>
+        <input
+          type="text"
+          id="author"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="50"
+          required
+        />
+        <label for="pages">Number of pages</label>
+        <input
+          type="number"
+          id="pages"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="5"
+          required
+        />
+
+        <p>Have you read it?</p>
+        <label for="yes">Yes</label>
+        <input type="radio" id="yes" name="read" value="true" required />
+        <label for="no">No</label>
+        <input type="radio" id="no" name="read" value="false" required />
+
+        <button form="new-book" type="submit">Add book</button>
+        <button form="new-book" type="reset">Reset</button>
+      </form>
     </div>
   </body>
 </html>

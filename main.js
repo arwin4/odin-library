@@ -37,16 +37,6 @@ function createDummyBooks() {
   myLibrary.push(theHobbit);
 }
 
-function addBookToLibrary() {
-  const title = prompt('title');
-  const author = prompt('author');
-  const pages = Number(prompt('number of pages'));
-  const read = Boolean(prompt('have you read it?'));
-
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-}
-
 function putBookOnShelf(book) {
   // Make a new div 'book' and fill it with the book's information
   const bookNode = document.createElement('div');
@@ -69,7 +59,7 @@ function putBookOnShelf(book) {
 
   const readNode = document.createElement('p');
   readNode.classList.add('read');
-  if (book.read === true) {
+  if (book.read === 'true' || book.read === true) {
     readNode.textContent = 'You have read this book';
   } else {
     readNode.textContent = "You haven't read this book";
@@ -78,6 +68,17 @@ function putBookOnShelf(book) {
 
   const bookshelf = document.querySelector('.bookshelf');
   bookshelf.appendChild(bookNode);
+}
+
+// eslint-disable-next-line no-unused-vars
+function addBookToLibrary(title, author, pages, read) {
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
+  putBookOnShelf(myLibrary.at(-1));
+
+  window.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
 }
 
 function fillBookshelf() {
