@@ -25,6 +25,9 @@ const lifeAndTimes = new Book(
 );
 myLibrary.push(lifeAndTimes);
 
+const onlyAPoorOldMan = new Book('Only a Poor Old Man', 'Carl Barks', 32, true);
+myLibrary.push(onlyAPoorOldMan);
+
 function addBookToLibrary() {
   const title = prompt('title');
   const author = prompt('author');
