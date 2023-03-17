@@ -14,19 +14,27 @@ Book.prototype.info = function BookInfo() {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
-myLibrary.push(theHobbit);
+function createDummyBooks() {
+  const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 
-const lifeAndTimes = new Book(
-  'The Life and Times of Scrooge McDuck',
-  'Keno Don Rosa',
-  266,
-  true
-);
-myLibrary.push(lifeAndTimes);
+  const lifeAndTimes = new Book(
+    'The Life and Times of Scrooge McDuck',
+    'Keno Don Rosa',
+    266,
+    true
+  );
 
-const onlyAPoorOldMan = new Book('Only a Poor Old Man', 'Carl Barks', 32, true);
-myLibrary.push(onlyAPoorOldMan);
+  const onlyAPoorOldMan = new Book(
+    'Only a Poor Old Man',
+    'Carl Barks',
+    32,
+    true
+  );
+
+  myLibrary.push(lifeAndTimes);
+  myLibrary.push(onlyAPoorOldMan);
+  myLibrary.push(theHobbit);
+}
 
 function addBookToLibrary() {
   const title = prompt('title');
@@ -54,4 +62,5 @@ function fillBookshelf() {
   });
 }
 
+createDummyBooks();
 fillBookshelf();
