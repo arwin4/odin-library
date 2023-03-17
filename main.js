@@ -15,6 +15,7 @@ Book.prototype.info = function BookInfo() {
 };
 
 function createDummyBooks() {
+  // Create some example books to fill the bookshelf
   const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
 
   const lifeAndTimes = new Book(
@@ -47,6 +48,7 @@ function addBookToLibrary() {
 }
 
 function fillBookshelf() {
+  // Make a card for each book with that book's information
   const bookshelf = document.querySelector('.bookshelf');
 
   myLibrary.forEach((book) => {
@@ -81,5 +83,6 @@ function fillBookshelf() {
   });
 }
 
+// Start the application
 createDummyBooks();
 fillBookshelf();
