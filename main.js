@@ -56,8 +56,27 @@ function fillBookshelf() {
     const titleNode = document.createElement('h3');
     titleNode.classList.add('book-title');
     titleNode.textContent = book.title;
-
     bookNode.appendChild(titleNode);
+
+    const authorNode = document.createElement('p');
+    authorNode.classList.add('author');
+    authorNode.textContent = book.author;
+    bookNode.appendChild(authorNode);
+
+    const pagesNode = document.createElement('p');
+    pagesNode.classList.add('pages');
+    pagesNode.textContent = book.pages;
+    bookNode.appendChild(pagesNode);
+
+    const readNode = document.createElement('p');
+    readNode.classList.add('read');
+    if (book.read === true) {
+      readNode.textContent = 'You have read this book';
+    } else {
+      readNode.textContent = "You haven't read this book";
+    }
+    bookNode.appendChild(readNode);
+
     bookshelf.appendChild(bookNode);
   });
 }
