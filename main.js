@@ -14,8 +14,16 @@ Book.prototype.info = function BookInfo() {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 'not read yet');
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
 myLibrary.push(theHobbit);
+
+const lifeAndTimes = new Book(
+  'The Life and Times of Scrooge McDuck',
+  'Keno Don Rosa',
+  300,
+  true
+);
+myLibrary.push(lifeAndTimes);
 
 function addBookToLibrary() {
   const title = prompt('title');
