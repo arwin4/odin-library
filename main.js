@@ -59,7 +59,7 @@ function putBookOnShelf(book) {
 
   const readNode = document.createElement('p');
   readNode.classList.add('read');
-  if (book.read === 'true' || book.read === true) {
+  if (book.read === true) {
     readNode.textContent = 'You have read this book';
   } else {
     readNode.textContent = "You haven't read this book";
@@ -70,21 +70,28 @@ function putBookOnShelf(book) {
   bookshelf.appendChild(bookNode);
 }
 
-// eslint-disable-next-line no-unused-vars
-function addBookToLibrary(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
-  myLibrary.push(book);
-  putBookOnShelf(myLibrary.at(-1));
-
-  window.addEventListener('submit', (e) => {
-    e.preventDefault();
-  });
-}
-
 function fillBookshelf() {
   myLibrary.forEach((book) => putBookOnShelf(book));
+}
+
+function handleNewBookSubmit() {
+  const form = document.getElementById('new-book');
+  form.addEventListener('submit', (e) => {
+    // Prevent page change
+    e.preventDefault();
+
+    const book = new Book(
+      form.title.value,
+      form.author.value,
+      form.pages.value,
+      form.read.value === 'true' // convert string to boolean
+    );
+    myLibrary.push(book);
+    putBookOnShelf(myLibrary.at(-1));
+  });
 }
 
 // Start the application
 createDummyBooks();
 fillBookshelf();
+handleNewBookSubmit();
