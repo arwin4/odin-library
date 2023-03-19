@@ -88,6 +88,7 @@ function putBookOnShelf(book) {
 }
 
 function fillBookshelf() {
+  createDummyBooks();
   myLibrary.forEach((book) => {
     book.number = bookNumber;
     putBookOnShelf(book);
@@ -113,6 +114,5 @@ function handleNewBookSubmit() {
 }
 
 // Start the application
-createDummyBooks();
 fillBookshelf();
 handleNewBookSubmit();
