@@ -1,13 +1,14 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
 
 const myLibrary = [];
+let bookNumber = 0;
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, number) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.number = number;
 }
 
 Book.prototype.info = function BookInfo() {
@@ -37,10 +38,18 @@ function createDummyBooks() {
   myLibrary.push(theHobbit);
 }
 
+function deleteBook(bookNode) {
+  bookNode.remove();
+  const currentNumber = parseFloat(bookNode.getAttribute('number'));
+  const index = myLibrary.findIndex((book) => book.number === currentNumber);
+  myLibrary.splice(index, 1);
+}
+
 function putBookOnShelf(book) {
   // Make a new div 'book' and fill it with the book's information
   const bookNode = document.createElement('div');
   bookNode.classList.add('book');
+  bookNode.setAttribute('number', bookNumber);
 
   const titleNode = document.createElement('h3');
   titleNode.classList.add('book-title');
@@ -66,12 +75,23 @@ function putBookOnShelf(book) {
   }
   bookNode.appendChild(readNode);
 
+  const deleteButton = document.createElement('button');
+  deleteButton.classList.add('delete-book');
+  deleteButton.textContent = 'Delete book';
+  deleteButton.addEventListener('click', () => deleteBook(bookNode));
+  bookNode.appendChild(deleteButton);
+
   const bookshelf = document.querySelector('.bookshelf');
   bookshelf.appendChild(bookNode);
+
+  bookNumber += 1;
 }
 
 function fillBookshelf() {
-  myLibrary.forEach((book) => putBookOnShelf(book));
+  myLibrary.forEach((book) => {
+    book.number = bookNumber;
+    putBookOnShelf(book);
+  });
 }
 
 function handleNewBookSubmit() {
@@ -84,7 +104,8 @@ function handleNewBookSubmit() {
       form.title.value,
       form.author.value,
       form.pages.value,
-      form.read.value === 'true' // convert string to boolean
+      form.read.value === 'true', // convert string to boolean
+      bookNumber
     );
     myLibrary.push(book);
     putBookOnShelf(myLibrary.at(-1));
