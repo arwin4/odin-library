@@ -15,6 +15,31 @@ Book.prototype.info = function BookInfo() {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
 };
 
+function displayReadStatus(book, bookNode) {
+  // Add a node displaying the read status or change it if it already exists
+  let readNode;
+  if (bookNode.querySelector('.read')) {
+    readNode = bookNode.querySelector('.read');
+  } else {
+    readNode = document.createElement('p');
+    readNode.classList.add('read');
+  }
+
+  if (book.read === true) {
+    readNode.textContent = 'You have read this book';
+  } else {
+    readNode.textContent = "You haven't read this book";
+  }
+
+  const pagesNode = bookNode.querySelector('.pages');
+  pagesNode.appendChild(readNode);
+}
+
+Book.prototype.toggleRead = function ToggleRead(bookNode) {
+  this.read = !this.read;
+  displayReadStatus(this, bookNode);
+};
+
 function createDummyBooks() {
   // Create some example books to fill the bookshelf
   const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false);
@@ -66,14 +91,12 @@ function putBookOnShelf(book) {
   pagesNode.textContent = book.pages;
   bookNode.appendChild(pagesNode);
 
-  const readNode = document.createElement('p');
-  readNode.classList.add('read');
-  if (book.read === true) {
-    readNode.textContent = 'You have read this book';
-  } else {
-    readNode.textContent = "You haven't read this book";
-  }
-  bookNode.appendChild(readNode);
+  displayReadStatus(book, bookNode);
+  const toggleReadButton = document.createElement('button');
+  toggleReadButton.classList.add('read-button');
+  toggleReadButton.textContent = 'Toggle read status';
+  toggleReadButton.addEventListener('click', () => book.toggleRead(bookNode));
+  bookNode.appendChild(toggleReadButton);
 
   const deleteButton = document.createElement('button');
   deleteButton.classList.add('delete-book');
