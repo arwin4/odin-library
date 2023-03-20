@@ -63,10 +63,9 @@ function createDummyBooks() {
   myLibrary.push(theHobbit);
 }
 
-function deleteBook(bookNode) {
+function deleteBook(book, bookNode) {
   bookNode.remove();
-  const currentNumber = parseFloat(bookNode.getAttribute('number'));
-  const index = myLibrary.findIndex((book) => book.number === currentNumber);
+  const index = myLibrary.findIndex((item) => item.number === book.number);
   myLibrary.splice(index, 1);
 }
 
@@ -101,7 +100,7 @@ function putBookOnShelf(book) {
   const deleteButton = document.createElement('button');
   deleteButton.classList.add('delete-book');
   deleteButton.textContent = 'Delete book';
-  deleteButton.addEventListener('click', () => deleteBook(bookNode));
+  deleteButton.addEventListener('click', () => deleteBook(book, bookNode));
   bookNode.appendChild(deleteButton);
 
   const bookshelf = document.querySelector('.bookshelf');
