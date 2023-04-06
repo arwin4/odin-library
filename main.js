@@ -3,17 +3,24 @@
 const myLibrary = [];
 let bookNumber = 0;
 
-function Book(title, author, pages, read, number) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.number = number;
-}
+class Book {
+  constructor(title, author, pages, read, number) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.number = number;
+  }
 
-Book.prototype.info = function BookInfo() {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-};
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
+  }
+
+  toggleRead(bookNode) {
+    this.read = !this.read;
+    displayReadStatus(this, bookNode);
+  }
+}
 
 function displayReadStatus(book, bookNode) {
   // Add a node displaying the read status or change it if it already exists
@@ -34,11 +41,6 @@ function displayReadStatus(book, bookNode) {
   const pagesNode = bookNode.querySelector('.pages');
   pagesNode.appendChild(readNode);
 }
-
-Book.prototype.toggleRead = function ToggleRead(bookNode) {
-  this.read = !this.read;
-  displayReadStatus(this, bookNode);
-};
 
 function createDummyBooks() {
   // Create some example books to fill the bookshelf
